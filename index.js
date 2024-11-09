@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const { initialData } = require("./cron/initialData");
 dotenv.config();
 const app = express();
+const { currency } = require("./cron/data");
+const { getDates } = require("./utils/getDates");
 const PORT = process.env.PORT || 3000;
 const routes = require("./router/forexData");
 const { scrapeData } = require("./utils/scrape");
@@ -13,6 +15,12 @@ app.get("/", (req, res) => {
 });
 app.use(initialData);
 app.use("/api", routes);
-app.listen(PORT, initialData(), () => {
-  console.log(`Server started on port ${PORT}`);
-});
+const timeStamp = getDates("1Y");
+app.listen(
+  PORT,
+  scrapeData("GBP", "INR", timeStamp.from, timeStamp.to),
+  scrapeData("AED", "INR", timeStamp.from, timeStamp.to),
+  () => {
+    console.log(`Server started on port ${PORT}`);
+  },
+);
