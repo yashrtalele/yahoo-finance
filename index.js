@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 app.use(initialData);
 app.use("/api", routes);
-const timeStamp = getDates("1Y");
+const timeStamp = getDates("1M");
 app.listen(
   PORT,
   scrapeData("GBP", "INR", timeStamp.from, timeStamp.to),
