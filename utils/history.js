@@ -11,6 +11,7 @@ async function history(url) {
         "--no-zygote",
         "--single-process",
       ],
+      headless: true,
       executablePath:
         process.env.NODE_ENV === "production"
           ? process.env.PUPPETEER_EXECUTABLE_PATH
