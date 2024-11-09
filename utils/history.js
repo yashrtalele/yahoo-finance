@@ -11,12 +11,13 @@ async function history(url) {
         "--no-zygote",
         "--single-process",
       ],
-      executablePath: process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
+      executablePath:
+        process.env.NODE_ENV === "production"
+          ? process.env.PUPPETEER_EXECUTABLE_PATH
+          : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: "load", timeout: 600000 });
+    await page.goto(url, { waitUntil: "networkidle0", timeout: 600000 });
 
     const data = await page.evaluate(() => {
       const rows = document.querySelectorAll("table tbody tr");
