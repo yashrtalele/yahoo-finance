@@ -7,10 +7,6 @@ async function history(url) {
     const browser = await puppeteer.launch({
       args: ["--no-sandbox"],
       headless: true,
-      executablePath:
-        process.env.NODE_ENV === "production"
-          ? process.env.PUPPETEER_EXECUTABLE_PATH
-          : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2", timeout: 0 });
