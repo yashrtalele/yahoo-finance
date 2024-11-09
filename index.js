@@ -13,6 +13,6 @@ app.get("/", (req, res) => {
 });
 app.use("/api", routes);
 initialData();
-app.listen(PORT, scrapeData("USD", "INR", "2024-11-02", "2024-11-09"), () => {
+app.listen(PORT, initialData(), () => {
   console.log(`Server started on port ${PORT}`);
 });
