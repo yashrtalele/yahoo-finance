@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("Connected to the Port!");
 });
+app.use(initialData);
 app.use("/api", routes);
-initialData();
 app.listen(PORT, initialData(), () => {
   console.log(`Server started on port ${PORT}`);
 });
