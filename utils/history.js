@@ -5,17 +5,11 @@ require("dotenv").config();
 async function history(url) {
   try {
     const browser = await puppeteer.launch({
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--no-zygote",
-        "--single-process",
-      ],
+      args: ["--no-sandbox"],
       headless: true,
-      executablePath:
-        process.env.NODE_ENV === "production"
-          ? process.env.PUPPETEER_EXECUTABLE_PATH
-          : puppeteer.executablePath(),
+      executablePath: process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle0", timeout: 600000 });
